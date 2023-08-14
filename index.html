@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Студент</title>
+</head>
+<body>
+<script>
+class Student {
+    constructor(firstName, lastName, birthYear) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthYear = birthYear;
+        this.grades = [];
+        this.attendance = new Array(25).fill(null);
+    }
+
+    present() {
+        const emptySlotIndex = this.attendance.indexOf(null);
+        if (emptySlotIndex !== -1) {
+            this.attendance[emptySlotIndex] = true;
+        }
+    }
+
+    absent() {
+        const emptySlotIndex = this.attendance.indexOf(null);
+        if (emptySlotIndex !== -1) {
+            this.attendance[emptySlotIndex] = false;
+        }
+    }
+
+    getAge() {
+        const currentYear = new Date().getFullYear();
+        return currentYear - this.birthYear;
+    }
+
+    getAverageGrade() {
+        if (this.grades.length === 0) {
+            return 0;
+        }
+        const sum = this.grades.reduce((total, grade) => total + grade, 0);
+        return sum / this.grades.length;
+    }
+
+    summary() {
+        const averageGrade = this.getAverageGrade();
+        const attendanceRatio = this.attendance.filter(Boolean).length / this.attendance.length;
+
+        if (averageGrade > 90 && attendanceRatio > 0.9) {
+            return "Молодець!";
+        } else if (averageGrade > 90 || attendanceRatio > 0.9) {
+            return "Добре, але можна краще";
+        } else {
+            return "Редиска!";
+        }
+    }
+}
+
+const student1 = new Student("Іван", "Петров", 1999);
+const student2 = new Student("Марія", "Коваль", 2001);
+const student3 = new Student("Олександр", "Сидоров", 2000);
+
+student1.present();student1.present();student1.present();student1.present();
+student1.present();student1.present();student1.present();student1.present();
+student1.present();student1.present();student1.present();student1.present();
+student1.present();student1.present();student1.present();student1.present();
+student1.present();student1.present();student1.present();student1.present();
+student1.present();student1.present();student1.present();student1.present();
+student1.present()
+student1.grades = [95, 97, 92, 98, 98];
+console.log("Студент 1:");
+console.log("Вік:", student1.getAge());
+console.log("Середній бал:", student1.getAverageGrade());
+console.log("Відвідуваність:", student1.attendance);
+console.log("Заключна оцінка:", student1.summary());
+
+student2.present();student2.absent();student2.absent();student2.absent();
+student2.present();student2.present();student2.present();student2.present();
+student2.present();student2.absent();student2.absent();student2.absent();
+student2.present();student2.present();student2.absent();student2.absent();
+student2.absent();student2.absent();student2.present();student2.present();
+student2.present();student2.absent();student2.absent();student2.absent();
+student2.present()
+
+student2.grades = [98, 93, 92, 90, 85];
+console.log("\nСтудент 2:");
+console.log("Вік:", student2.getAge());
+console.log("Середній бал:", student2.getAverageGrade());
+console.log("Відвідуваність:", student2.attendance);
+console.log("Заключна оцінка:", student2.summary());
+
+student3.present();student3.present();student3.present();student3.present();
+student3.absent();student3.absent();student3.absent();student3.absent();
+student3.absent();student3.absent();student3.absent();student3.absent();
+student3.present();student3.absent();student3.absent();student3.absent();
+student3.absent();student3.absent();student3.absent();student3.absent();
+student3.absent();student3.absent();student3.absent();student3.absent();
+student3.absent();
+
+student3.grades = [75, 70, 68, 72, 60];
+console.log("\nСтудент 3:");
+console.log("Вік:", student3.getAge());
+console.log("Середній бал:", student3.getAverageGrade());
+console.log("Відвідуваність:", student3.attendance);
+console.log("Заключна оцінка:", student3.summary());
+</script>
+</body>
+</html>
